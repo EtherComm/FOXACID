@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Release data for the pyreadline project.
 
-$Id: release.py 2411 2007-05-29 21:14:28Z jstenar $"""
+$Id: release.py 2411 2007-0o5-29 21:14:28Z jstenar $"""
 
 #*****************************************************************************
 #       Copyright (C) 2006  Jorgen Stenarson. <jorgen.stenarson@bostream.nu>

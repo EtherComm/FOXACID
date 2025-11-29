@@ -23,9 +23,9 @@ def setwrapper(f):
         try:
             return f(*args, **kwargs)
         except AttributeError:
-            raise exception.CmdErr, "Unknown parameter"
+            raise exception.CmdErr("Unknown parameter")
         except (ValueError, TypeError, OverflowError):
-            raise exception.CmdErr, "Invalid value"
+            raise exception.CmdErr("Invalid value")
         except (IOError, RuntimeError, ZeroDivisionError,
                 IndexError, SyntaxError, MemoryError) as err:
             raise exception.CmdErr("TRCH internal : " + str(err))
@@ -37,7 +37,7 @@ def resetwrapper(f):
         try:
             return f(*args, **kwargs)
         except AttributeError:
-            raise exception.CmdErr, "Unknown parameter"
+            raise exception.CmdErr("Unknown parameter")
         except (IOError, RuntimeError, ZeroDivisionError,
                 IndexError, SyntaxError, MemoryError) as err:
             raise exception.CmdErr("TRCH internal : " + str(err))
@@ -48,7 +48,7 @@ def getwrapper(f):
         try:
             return f(*args, **kwargs)
         except AttributeError:
-            raise exception.CmdErr, "Unknown parameter"
+            raise exception.CmdErr("Unknown parameter")
     return wrap
 
 def safesetparameter(f):
@@ -58,7 +58,7 @@ def safesetparameter(f):
         f(self, name, value)
         if not self.hasValidValue(name):
             self._trch_set(name, old)
-            raise exception.CmdErr, "Invalid value for '%s' (%s)" % (name, value)
+            raise exception.CmdErr("Invalid value for '%s' (%s)") % (name, value)
     return wrap
 
 def safesetchoice(f):
@@ -71,7 +71,7 @@ def safesetchoice(f):
         if not self.hasValidValue(name):
             # Restore to the old
             self._trch_set(name, old)
-            raise exception.CmdErr, "Invalid value for %s (%s)" % (name, value)
+            raise exception.CmdErr("Invalid value for %s (%s)") % (name, value)
         # We want var matches, not var/val 
         for param in paramcache:
             if param.name in util.iDict(self.cache_choiceparams(name)):
@@ -103,10 +103,10 @@ class Plugin(truantchild.Config):
             self.consolemode = util.CONSOLE_DEFAULT
             self.lastsession = None
         except AttributeError:
-            #print >>sys.stderr, "Plugin.__init__ failed to find an attribute - %s" % (str(e))
+            #print("Plugin.__init__ failed to find an attribute - %s" % (str(e)), file=sys.stderr)
             raise
         except TruantchildError:
-            #print >>sys.stderr, "Plugin.__init__ failed to initialize Config - %s" % (str(e))
+            #print("Plugin.__init__ failed to initialize Config - %s" % (str(e)), file=sys.stderr)
             raise
             
     """
@@ -375,7 +375,7 @@ class Plugin(truantchild.Config):
         try:
             return self.getTouchList()[index]
         except IndexError:
-            raise exception.CmdErr, "Bad touch"
+            raise exception.CmdErr("Bad touch")
 
     """
     Truantchild abstractions

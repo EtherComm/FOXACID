@@ -257,8 +257,8 @@ class Console(object):
 
 # Map ANSI color escape sequences into Windows Console Attributes
 
-    terminal_escape = re.compile('(\001?\033\\[[0-9;]+m\002?)')
-    escape_parts = re.compile('\001?\033\\[([0-9;]+)m\002?')
+    terminal_escape = re.compile('(\0o01?\0o33\\[[0-9;]+m\0o02?)')
+    escape_parts = re.compile('\0o01?\0o33\\[([0-9;]+)m\0o02?')
     escape_to_color = { '0;30': 0x0,             #black
                         '0;31': 0x4,             #red
                         '0;32': 0x2,             #green
@@ -280,7 +280,7 @@ class Console(object):
 
     # This pattern should match all characters that change the cursor position differently
     # than a normal character.
-    motion_char_re = re.compile('([\n\r\t\010\007])')
+    motion_char_re = re.compile('([\n\r\t\0o10\0o07])')
 
     def write_scrolling(self, text, attr=None):
         '''write text at current cursor position while watching for scrolling.
@@ -315,9 +315,9 @@ class Console(object):
                     if x > w: # newline
                         x -= w
                         y += 1
-                elif chunk[0] == '\007': # bell
+                elif chunk[0] == '\0o07': # bell
                     pass
-                elif chunk[0] == '\010':
+                elif chunk[0] == '\0o10':
                     x -= 1
                     if x < 0:
                         y -= 1 # backed up 1 line
@@ -559,10 +559,10 @@ class Console(object):
         if width is not None and height is not None:
             wmin = info.srWindow.Right - info.srWindow.Left + 1
             hmin = info.srWindow.Bottom - info.srWindow.Top + 1
-            #print wmin, hmin
+            #print(wmin, hmin)
             width = max(width, wmin)
             height = max(height, hmin)
-            #print width, height
+            #print(width, height)
             self.SetConsoleScreenBufferSize(self.hout, self.fixcoord(width, height))
         else:
             return (info.dwSize.X, info.dwSize.Y)
@@ -578,7 +578,7 @@ class Console(object):
             self.SetConsoleCursorInfo(self.hout, byref(info))
 
     def bell(self):
-        self.write('\007')
+        self.write('\0o07')
 
     def next_serial(self):
         '''Get next event serial number.'''
@@ -681,7 +681,7 @@ def hook_wrapper_23(stdin, stdout, prompt):
         res = readline_hook(prompt)
         # make sure it returned the right sort of thing
         if res and not isinstance(res, str):
-            raise TypeError, 'readline must return a string.'
+            raise TypeError('readline must return a string.')
     except KeyboardInterrupt:
         # GNU readline returns 0 on keyboard interrupt
         return 0
@@ -689,7 +689,7 @@ def hook_wrapper_23(stdin, stdout, prompt):
         # It returns an empty string on EOF
         res = ''
     except:
-        print >>sys.stderr, 'Readline internal error'
+        print('Readline internal error', file=sys.stderr)
         traceback.print_exc()
         res = '\n'
     # we have to make a copy because the caller expects to free the result
@@ -705,7 +705,7 @@ def hook_wrapper(prompt):
         res = readline_hook(prompt)
         # make sure it returned the right sort of thing
         if res and not isinstance(res, str):
-            raise TypeError, 'readline must return a string.'
+            raise TypeError('readline must return a string.')
     except KeyboardInterrupt:
         # GNU readline returns 0 on keyboard interrupt
         return 0
@@ -713,7 +713,7 @@ def hook_wrapper(prompt):
         # It returns an empty string on EOF
         res = ''
     except:
-        print >>sys.stderr, 'Readline internal error'
+        print('Readline internal error', file=sys.stderr)
         traceback.print_exc()
         res = '\n'
     # we have to make a copy because the caller expects to free the result
@@ -749,10 +749,10 @@ if __name__ == '__main__':
     sys.stdout = c
     sys.stderr = c
     c.page()
-    print p("d"),p("D")
+    print(p("d"),p("D"))
     c.pos(5, 10)
     c.write('hi there')
-    print 'some printed output'
+    print('some printed output')
     for i in range(10):
         c.getkeypress()
     del c

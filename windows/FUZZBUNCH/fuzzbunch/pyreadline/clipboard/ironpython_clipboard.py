@@ -21,7 +21,7 @@ def SetClipboardText(text):
 
 if __name__ == '__main__':
     txt=GetClipboardText()                            # display last text clipped
-    print txt
+    print(txt)
      
      
      

@@ -5,7 +5,7 @@ try:
     #pyreadline.rlmain.config_path=r"c:\xxx\pyreadlineconfig.ini"
     import readline,atexit
 except ImportError:
-    print "Module readline not available."
+    print("Module readline not available.")
 else:
     #import tab completion functionality
     import rlcompleter

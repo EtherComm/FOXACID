@@ -1,4 +1,4 @@
-#!/usr/bin/python2.6
+#!/usr/bin/env python3
 import code
 import os
 import sys

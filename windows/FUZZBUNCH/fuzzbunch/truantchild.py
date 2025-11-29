@@ -562,12 +562,12 @@ class Paramgroup:
         self.choiceList  = {}
         self.paramList   = {}
 
-        for i in xrange(0, self.getNumParameters()):
+        for i in range(0, self.getNumParameters()):
             param = trch.Paramgroup_getParameter(paramGroup, i)
             name = trch.Parameter_getName(param)
             self.paramList[name.lower()] = Parameter(param)
 
-        for i in xrange(0, self.getNumParamchoices()):
+        for i in range(0, self.getNumParamchoices()):
             paramChoice = trch.Paramgroup_getParamchoice(paramGroup, i)
             name = trch.Paramchoice_getName(paramChoice)
             self.choiceList[name.lower()] = Paramchoice(paramChoice)
@@ -642,7 +642,7 @@ class Paramchoice:
         self.groupList  = {}
         
         self.groupNames = []
-        for i in xrange(0, self.getNumParamgroups()):
+        for i in range(0, self.getNumParamgroups()):
             paramGroup = trch.Paramchoice_getParamgroup(paramChoice, i)
             name = trch.Paramgroup_getName(paramGroup)
             self.groupNames.append(name.lower())
@@ -825,12 +825,12 @@ class Params:
         self.namespaceUri = ns
         self.schemaVersion = ver
         
-        for i in xrange(0, self.getNumParameters()):
+        for i in range(0, self.getNumParameters()):
             param = trch.Params_getParameter(self.parameters, i)
             name = trch.Parameter_getName(param)
             self.paramList[name.lower()] = Parameter(param)
 
-        for i in xrange(0, self.getNumParamchoices()):
+        for i in range(0, self.getNumParamchoices()):
             paramChoice = trch.Params_getParamchoice(self.parameters, i)
             name = trch.Paramchoice_getName(paramChoice)
             self.choiceList[name.lower()] = Paramchoice(paramChoice)

@@ -442,7 +442,7 @@ class Tests (unittest.TestCase):
 
     def test_motion_find_char_forward_multiplier (self):
         r = ViModeTest ()
-        r._set_line ('ab cd ef 01 23 45 ab cd ef 01 23 45 ab cd ef 01 23 45')
+        r._set_line ('ab cd ef 0o1 23 45 ab cd ef 0o1 23 45 ab cd ef 0o1 23 45')
         r.input ('Escape')
         r.input ('"0"')
         r.input ('"2"')
@@ -452,7 +452,7 @@ class Tests (unittest.TestCase):
 
     def test_motion_find_char_backward_multiplier (self):
         r = ViModeTest ()
-        r._set_line ('ab cd ef 01 23 45 ab cd ef 01 23 45 ab cd ef 01 23 45')
+        r._set_line ('ab cd ef 0o1 23 45 ab cd ef 0o1 23 45 ab cd ef 0o1 23 45')
         r.input ('Escape')
         r.input ('"$"')
         self.assertEqual (52, r.line_cursor)
@@ -527,7 +527,7 @@ class Tests (unittest.TestCase):
 
     def test_motion_to_char_forward_multiplier (self):
         r = ViModeTest ()
-        r._set_line ('ab cd ef 01 23 45 ab cd ef 01 23 45 ab cd ef 01 23 45')
+        r._set_line ('ab cd ef 0o1 23 45 ab cd ef 0o1 23 45 ab cd ef 0o1 23 45')
         r.input ('Escape')
         r.input ('"0"')
         r.input ('"2"')
@@ -537,7 +537,7 @@ class Tests (unittest.TestCase):
 
     def test_motion_to_char_backward_multiplier (self):
         r = ViModeTest ()
-        r._set_line ('ab cd ef 01 23 45 ab cd ef 01 23 45 ab cd ef 01 23 45')
+        r._set_line ('ab cd ef 0o1 23 45 ab cd ef 0o1 23 45 ab cd ef 0o1 23 45')
         r.input ('Escape')
         r.input ('"$"')
         self.assertEqual (52, r.line_cursor)
@@ -1160,18 +1160,18 @@ class Tests (unittest.TestCase):
 
     def test_put_multiple (self):
         r = ViModeTest ()
-        r._set_line ('001122')
+        r._set_line ('0o01122')
         r.input ('Escape')
         r.input ('"0"')
         r.input ('"y3l"')
         self.assert_ (not r.vi_is_insert_mode)
         self.assertEqual (r.line_cursor, 0)
         r.input ('"2P"')
-        self.assertEqual (r.line, '001001001122')
+        self.assertEqual (r.line, '0o01001001122')
         self.assertEqual (r.line_cursor, 5)
         r.input ('"f2"')
         r.input ('"3p"')
-        self.assertEqual (r.line, '001001001120010010012')
+        self.assertEqual (r.line, '0o01001001120010010012')
         self.assertEqual (r.line_cursor, 19)
 
     def test_put_undo (self):
@@ -1861,7 +1861,7 @@ class Tests (unittest.TestCase):
         r = ViModeTest ()
         r._set_line ('aaa')
         r.input ('Escape')
-        # print 'xx', sys._getframe().f_lineno, r._vi_undo_cursor, r._vi_undo_stack
+        # print('xx'), sys._getframe().f_lineno, r._vi_undo_cursor, r._vi_undo_stack
         r.input ('"0rz"')
         self.assertEqual (r.line, 'zaa')
         r.input ('"u"')
@@ -2132,15 +2132,13 @@ if __name__ == '__main__':
 
     tested=ViModeTest.tested_commands.keys()    
     tested.sort()
-    print " Tested functions ".center(60,"-")
-    print "\n".join(tested)
-    print
-    
-    all_funcs=dict([(x.__name__,x) for x in ViModeTest().key_dispatch.values()])
+    print(" Tested functions ").center(60,"-")
+    print("\n").join(tested)
+    print(all_funcs=dict([(x.__name__,x) for x in ViModeTest().key_dispatch.values()]))
     all_funcs=all_funcs.keys()
     not_tested=[x for x in all_funcs if x not in tested]
     not_tested.sort()
-    print " Not tested functions ".center(60,"-")
-    print "\n".join(not_tested)
+    print(" Not tested functions ").center(60,"-")
+    print("\n").join(not_tested)
     
     

@@ -104,7 +104,7 @@ def make_keysym(keycode):
     return sym
 
 sym2code_map = {}
-for code,sym in code2sym_map.iteritems():
+for code,sym in code2sym_map.items():
     sym2code_map[sym.lower()] = code
 
 def key_text_to_keyinfo(keytext):
@@ -118,8 +118,8 @@ def key_text_to_keyinfo(keytext):
 def char_to_keyinfo(char, control=False, meta=False, shift=False):
     vk = (ord(char))
     if vk & 0xffff == 0xffff:
-        print 'VkKeyScan("%s") = %x' % (char, vk)
-        raise ValueError, 'bad key'
+        print('VkKeyScan("%s") = %x') % (char, vk)
+        raise ValueError('bad key')
     if vk & 0x100:
         shift = True
     if vk & 0x200:
@@ -170,7 +170,7 @@ def keyseq_to_keyinfo(keyseq):
             meta = True
             keyseq = keyseq[3:]
         elif keyseq.startswith('\\e'):
-            res.append(char_to_keyinfo('\033', control, meta, shift))
+            res.append(char_to_keyinfo('\0o33', control, meta, shift))
             control = meta = shift = False
             keyseq = keyseq[2:]
         elif len(keyseq) >= 1:

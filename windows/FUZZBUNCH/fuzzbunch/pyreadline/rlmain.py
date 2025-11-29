@@ -133,7 +133,7 @@ class Readline(object):
                     func = getattr(self.mode, py_name)
                 except AttributeError:
                     log('unknown func key="%s" func="%s"' % (key, func_name))
-                    print 'unknown function to bind: "%s"' % func_name
+                    print('unknown function to bind: "%s"') % func_name
                 self.mode._bind_key(key, func)
         except:
             log('error')
@@ -254,7 +254,7 @@ class Readline(object):
         out.append("------------- key bindings ------------")
         tablepat="%-7s %-7s %-7s %-15s %-15s "
         out.append(tablepat%("Control","Meta","Shift","Keycode/char","Function"))
-        bindings=[(k[0],k[1],k[2],k[3],v.__name__) for k,v in self.mode.key_dispatch.iteritems()]
+        bindings=[(k[0],k[1],k[2],k[3],v.__name__) for k,v in self.mode.key_dispatch.items()]
         bindings.sort()
         for key in bindings:
             out.append(tablepat%(key))
@@ -338,7 +338,7 @@ class Readline(object):
             if hasattr(modes[mode],name):
                 modes[mode]._bind_key(key,getattr(modes[mode],name))
             else:
-                print "Trying to bind unknown command '%s' to key '%s'"%(name,key)
+                print("Trying to bind unknown command '%s' to key '%s'")%(name,key)
         def un_bind_key(key):
             keyinfo = make_KeyPress_from_keydescr(key).tuple()
             if keyinfo in modes[mode].key_dispatch:
@@ -373,7 +373,7 @@ class Readline(object):
         def debug_output(on,filename="pyreadline_debug_log.txt"):  #Not implemented yet
             logger.start_log(on,filename)
             logger.log("STARTING LOG")
-#            print release.branch
+#            print(release.branch)
         def set_prompt_color(color):
             trtable={"black":0,"darkred":4,"darkgreen":2,"darkyellow":6,"darkblue":1,"darkmagenta":5,"darkcyan":3,"gray":7,
                      "red":4+8,"green":2+8,"yellow":6+8,"blue":1+8,"magenta":5+8,"cyan":3+8,"white":7+8}
@@ -407,13 +407,13 @@ class Readline(object):
         if os.path.isfile(inputrcpath): 
             try:
                 execfile(inputrcpath,loc,loc)
-            except Exception,x:
+            except Exception as x:
                 raise
                 import traceback
-                print >>sys.stderr, "Error reading .pyinputrc"
+                print("Error reading .pyinputrc", file=sys.stderr)
                 filepath,lineno=traceback.extract_tb(sys.exc_traceback)[1][:2]
-                print >>sys.stderr, "Line: %s in file %s"%(lineno,filepath)
-                print >>sys.stderr, x
+                print("Line: %s in file %s"%(lineno,filepath), file=sys.stderr)
+                print(x, file=sys.stderr)
                 raise ReadlineError("Error reading .pyinputrc")
 
 
@@ -454,7 +454,7 @@ set_pre_input_hook = rl.set_pre_input_hook
 
 if __name__ == '__main__':
     res = [ rl.readline('In[%d] ' % i) for i in range(3) ]
-    print res
+    print(res)
 else:
     console.install_readline(rl.readline)
     pass

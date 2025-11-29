@@ -120,7 +120,7 @@ def parse_touchlist(xmlFile):
         raise exception.PluginMetaErr("Error parsing '%s' XML.  Touches not configured" % (f))
         return []
     except IndexError:
-        # We didn't successfully get anything from "t:touchlist" Don't print here because some
+        # We didn't successfully get anything from "t:touchlist" Don't print(here because some)
         # things actually don't specify touches
         #return []
         raise

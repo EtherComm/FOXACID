@@ -762,7 +762,7 @@ def test_positioner(buff,points,positioner):
     print (" %s "%positioner.__class__.__name__).center(40,"-")
     buffstr=buff.line_buffer
     
-    print '"%s"'%(buffstr)
+    print('"%s"')%(buffstr)
     for point in points:
         b=TextLine(buff,point=point)
         out=[" "]*(len(buffstr)+1)
@@ -772,19 +772,19 @@ def test_positioner(buff,points,positioner):
         else:
             out[point]="."
             out[pos]="^"
-        print '"%s"'%("".join(out))
+        print('"%s"')%("".join(out))
     
 if __name__=="__main__":
     import startup
 
-    print '%-15s "%s"'%("Position",q.get_line_text())
-    print '%-15s "%s"'%("Point",show_pos(q,q.point))
+    print('%-15s "%s"')%("Position",q.get_line_text())
+    print('%-15s "%s"')%("Point",show_pos(q,q.point))
 
 
     for name,positioner in all_positioners:
         pos=positioner(q)
         []
-        print '%-15s "%s"'%(name,show_pos(q,pos,"^"))
+        print('%-15s "%s"')%(name,show_pos(q,pos,"^"))
 
     l=ReadLineTextBuffer("kjjk asads   asad")
     l.point=EndOfLine

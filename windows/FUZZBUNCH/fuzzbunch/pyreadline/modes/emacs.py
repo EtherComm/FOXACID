@@ -102,7 +102,7 @@ class EmacsMode(basemode.BaseMode):
                 try:
                     self.startup_hook()
                 except:
-                    print 'startup hook failed'
+                    print('startup hook failed')
                     traceback.print_exc()
 
         c = self.console
@@ -114,7 +114,7 @@ class EmacsMode(basemode.BaseMode):
             try:
                 self.pre_input_hook()
             except:
-                print 'pre_input_hook failed'
+                print('pre_input_hook failed')
                 traceback.print_exc()
                 self.pre_input_hook = None
 

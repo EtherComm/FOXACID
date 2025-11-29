@@ -57,7 +57,7 @@ class NotEmacsMode(basemode.BaseMode):
                 try:
                     self.startup_hook()
                 except:
-                    print 'startup hook failed'
+                    print('startup hook failed')
                     traceback.print_exc()
 
         c = self.console
@@ -69,7 +69,7 @@ class NotEmacsMode(basemode.BaseMode):
             try:
                 self.pre_input_hook()
             except:
-                print 'pre_input_hook failed'
+                print('pre_input_hook failed')
                 traceback.print_exc()
                 self.pre_input_hook = None
 
@@ -196,14 +196,14 @@ class NotEmacsMode(basemode.BaseMode):
     def reverse_search_history(self, e): # (C-r)
         '''Search backward starting at the current line and moving up
         through the history as necessary. This is an incremental search.'''
-#        print "HEJ"
+#        print("HEJ")
 #        self.console.bell()
         self._i_search(self._history.reverse_search_history, -1, e)
 
     def forward_search_history(self, e): # (C-s)
         '''Search forward starting at the current line and moving down
         through the the history as necessary. This is an incremental search.'''
-#        print "HEJ"
+#        print("HEJ")
 #        self.console.bell()
         self._i_search(self._history.forward_search_history, 1, e)
 

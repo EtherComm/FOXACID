@@ -12,7 +12,7 @@ try:
     import msvcrt
 except ImportError:
     msvcrt=None
-    print "problem"
+    print("problem")
         
 
 
@@ -21,10 +21,10 @@ port =8081
 s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
 
 s.bind(("",port))
-s.settimeout(0.05)
+s.settimeout(0.0o5)
 
-print "Starting logserver on port:",port
-print "Press q to quit logserver",port
+print("Starting logserver on port:"),port
+print("Press q to quit logserver"),port
 singleline=False
 
 
@@ -45,16 +45,16 @@ while 1:
         data,addr=s.recvfrom(1024)
     except socket.timeout:
         if check_key():
-            print "Quitting logserver"
+            print("Quitting logserver")
             break
         else:
             continue
     if data.startswith("@@"):
         continue
     if singleline:
-        print "\r"," "*78,"\r",data,#,addr
+        print("\r")," "*78,"\r",data,#,addr
     else:
-        print data
+        print(data)
     
     
 
