@@ -13,62 +13,65 @@ mswindows = (sys.platform == "win32")
 
 _libraries = {}
 
-if mswindows:
-    _libraries['exma.dll'] = ctypes.CDLL('exma-1.dll')
-else:
-    _libraries['exma.dll'] = ctypes.CDLL('libexma.so.1')
+try:
+    if mswindows:
+        _libraries['exma.dll'] = ctypes.CDLL('exma-1.dll')
+    else:
+        _libraries['exma.dll'] = ctypes.CDLL('libexma.so.1')
+    
+    STRING = ctypes.c_char_p
+    SOCKET = ctypes.c_uint 
 
+    getDefaultEMFile = _libraries['exma.dll'].getDefaultEMFile
+    getDefaultEMFile.restyp   = STRING
+    getDefaultEMFile.argtypes = []
 
-STRING = ctypes.c_char_p
-SOCKET = ctypes.c_uint 
+    readParamsFromEM = _libraries['exma.dll'].readParamsFromEM
+    readParamsFromEM.restype  = STRING
+    readParamsFromEM.argtypes = [STRING]
 
-getDefaultEMFile = _libraries['exma.dll'].getDefaultEMFile
-getDefaultEMFile.restyp   = STRING
-getDefaultEMFile.argtypes = []
+    writeParamsToEM = _libraries['exma.dll'].writeParamsToEM
+    writeParamsToEM.restype  = ctypes.c_int
+    writeParamsToEM.argtypes = [STRING, STRING]
 
-readParamsFromEM = _libraries['exma.dll'].readParamsFromEM
-readParamsFromEM.restype  = STRING
-readParamsFromEM.argtypes = [STRING]
+    bindRendezvous = _libraries['exma.dll'].bindRendezvous
+    bindRendezvous.restype  = ctypes.c_int
+    bindRendezvous.argtypes = [ctypes.POINTER(ctypes.c_ushort), ctypes.POINTER(SOCKET)]
 
-writeParamsToEM = _libraries['exma.dll'].writeParamsToEM
-writeParamsToEM.restype  = ctypes.c_int
-writeParamsToEM.argtypes = [STRING, STRING]
+    sendSockets = _libraries['exma.dll'].sendSockets
+    sendSockets.restype  = ctypes.c_int
+    sendSockets.argtypes = [SOCKET]
 
-bindRendezvous = _libraries['exma.dll'].bindRendezvous
-bindRendezvous.restype  = ctypes.c_int
-bindRendezvous.argtypes = [ctypes.POINTER(ctypes.c_ushort), ctypes.POINTER(SOCKET)]
+    closeRendezvous = _libraries['exma.dll'].closeRendezvous
+    closeRendezvous.restype  = ctypes.c_int
+    closeRendezvous.argtypes = [ctypes.c_ushort, SOCKET]
 
-sendSockets = _libraries['exma.dll'].sendSockets
-sendSockets.restype  = ctypes.c_int
-sendSockets.argtypes = [SOCKET]
+    connectRendezvous = _libraries['exma.dll'].connectRendezvous
+    connectRendezvous.restype  = ctypes.c_int
+    connectRendezvous.argtypes = [ctypes.c_ushort, ctypes.POINTER(SOCKET)]
 
-closeRendezvous = _libraries['exma.dll'].closeRendezvous
-closeRendezvous.restype  = ctypes.c_int
-closeRendezvous.argtypes = [ctypes.c_ushort, SOCKET]
+    recvSocket = _libraries['exma.dll'].recvSocket
+    recvSocket.restype  = ctypes.c_int
+    recvSocket.argtypes = [SOCKET, SOCKET, ctypes.POINTER(SOCKET)]
 
-connectRendezvous = _libraries['exma.dll'].connectRendezvous
-connectRendezvous.restype  = ctypes.c_int
-connectRendezvous.argtypes = [ctypes.c_ushort, ctypes.POINTER(SOCKET)]
+    disconnectRendezvous = _libraries['exma.dll'].disconnectRendezvous
+    disconnectRendezvous.restype  = ctypes.c_int
+    disconnectRendezvous.argtypes = [SOCKET]
 
-recvSocket = _libraries['exma.dll'].recvSocket
-recvSocket.restype  = ctypes.c_int
-recvSocket.argtypes = [SOCKET, SOCKET, ctypes.POINTER(SOCKET)]
+    writeParamsToEM = _libraries['exma.dll'].writeParamsToEM
+    writeParamsToEM.restype = ctypes.c_int
+    writeParamsToEM.argtypes = [ctypes.c_int, STRING]
 
-disconnectRendezvous = _libraries['exma.dll'].disconnectRendezvous
-disconnectRendezvous.restype  = ctypes.c_int
-disconnectRendezvous.argtypes = [SOCKET]
+    openEMForWriting = _libraries['exma.dll'].openEMForWriting
+    openEMForWriting.restype = ctypes.c_int
+    openEMForWriting.argtypes = [STRING]
 
-writeParamsToEM = _libraries['exma.dll'].writeParamsToEM
-writeParamsToEM.restype = ctypes.c_int
-writeParamsToEM.argtypes = [ctypes.c_int, STRING]
-
-openEMForWriting = _libraries['exma.dll'].openEMForWriting
-openEMForWriting.restype = ctypes.c_int
-openEMForWriting.argtypes = [STRING]
-
-
-__all__ = ['getDefaultEMFile', 'readParamsFromEM', 'writeParamsToEM',
-           'bindRendezvous', 'sendSockets', 'closeRendezvous',
-           'connectRendezvous', 'recvSocket', 'disconnectRendezvous',
-		   'writeParamsToEM', 'openEMForWriting']
+    __all__ = ['getDefaultEMFile', 'readParamsFromEM', 'writeParamsToEM',
+               'bindRendezvous', 'sendSockets', 'closeRendezvous',
+               'connectRendezvous', 'recvSocket', 'disconnectRendezvous',
+               'writeParamsToEM', 'openEMForWriting']
+except OSError:
+    # Library not available on this platform - define stubs
+    print("Warning: exma library not available, some functionality will be limited")
+    __all__ = []
 

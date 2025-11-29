@@ -100,8 +100,8 @@ def char_to_keyinfo(char, control=False, meta=False, shift=False):
     k=KeyPress()
     vk = VkKeyScan(ord(char))
     if vk & 0xffff == 0xffff:
-        print 'VkKeyScan("%s") = %x' % (char, vk)
-        raise ValueError, 'bad key'
+        print('VkKeyScan("%s") = %x') % (char, vk)
+        raise ValueError('bad key')
     if vk & 0x100:
         k.shift = True
     if vk & 0x200:

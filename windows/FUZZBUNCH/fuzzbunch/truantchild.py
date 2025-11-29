@@ -9,12 +9,16 @@ import exma
 import hashlib
 import os
 from util import superTuple, oParam
-import pytrch as trch
 
 try:
+    import pytrch as trch
     from pytrch import TrchError as TrchError
-except:
-    from pytrch import TrchError
+except ImportError:
+    # pytrch module not available (requires platform-specific binaries)
+    print("Warning: pytrch module not available, some functionality will be limited")
+    trch = None
+    class TrchError(Exception):
+        pass
 
 __all__ = ["attribute_convert", "Parameter", 
            "Paramgroup", "Paramchoice",
@@ -562,12 +566,12 @@ class Paramgroup:
         self.choiceList  = {}
         self.paramList   = {}
 
-        for i in xrange(0, self.getNumParameters()):
+        for i in range(0, self.getNumParameters()):
             param = trch.Paramgroup_getParameter(paramGroup, i)
             name = trch.Parameter_getName(param)
             self.paramList[name.lower()] = Parameter(param)
 
-        for i in xrange(0, self.getNumParamchoices()):
+        for i in range(0, self.getNumParamchoices()):
             paramChoice = trch.Paramgroup_getParamchoice(paramGroup, i)
             name = trch.Paramchoice_getName(paramChoice)
             self.choiceList[name.lower()] = Paramchoice(paramChoice)
@@ -642,7 +646,7 @@ class Paramchoice:
         self.groupList  = {}
         
         self.groupNames = []
-        for i in xrange(0, self.getNumParamgroups()):
+        for i in range(0, self.getNumParamgroups()):
             paramGroup = trch.Paramchoice_getParamgroup(paramChoice, i)
             name = trch.Paramgroup_getName(paramGroup)
             self.groupNames.append(name.lower())
@@ -752,6 +756,22 @@ class Config:
         self.init_config()
 
     def init_config(self):
+        if trch is None or not hasattr(exma, 'readParamsFromEM'):
+            # Libraries not available - initialize with minimal data
+            print("Warning: Cannot initialize config - platform-specific libraries not available")
+            self.configXML = None
+            self.config = None
+            self.id = "unknown"
+            self.name = "unknown"
+            self.version = "unknown"
+            self.configVersion = "unknown"
+            self.namespaceUri = ""
+            self.schemaVersion = ""
+            self._inputParams = None
+            self._outputParams = None
+            self._constants = None
+            return
+            
         self.configXML     = exma.readParamsFromEM(ctypes.c_char_p(self.xmlInConfig))
         # Config_unmarshal can fail and return None, which 
         # raises TrchError when passed to Config_getID
@@ -825,12 +845,12 @@ class Params:
         self.namespaceUri = ns
         self.schemaVersion = ver
         
-        for i in xrange(0, self.getNumParameters()):
+        for i in range(0, self.getNumParameters()):
             param = trch.Params_getParameter(self.parameters, i)
             name = trch.Parameter_getName(param)
             self.paramList[name.lower()] = Parameter(param)
 
-        for i in xrange(0, self.getNumParamchoices()):
+        for i in range(0, self.getNumParamchoices()):
             paramChoice = trch.Params_getParamchoice(self.parameters, i)
             name = trch.Paramchoice_getName(paramChoice)
             self.choiceList[name.lower()] = Paramchoice(paramChoice)

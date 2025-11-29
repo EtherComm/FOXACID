@@ -230,11 +230,11 @@ class RedirectionManager:
         while not done:
             try:
                 line = self.io.prompt_user(msg, default)
-            except exception.PromptHelp, err:
+            except exception.PromptHelp as err:
                 self.io.print_warning('No help available')
-            except exception.PromptErr, err:
+            except exception.PromptErr as err:
                 raise
-            except exception.CmdErr, err:
+            except exception.CmdErr as err:
                 self.io.print_error(err.getErr())
             if line:
                 return line
@@ -247,11 +247,11 @@ class RedirectionManager:
                 line = self.io.prompt_user(msg, default)
                 plugin.set(var, line)
                 done = plugin.hasValidValue(var)
-            except exception.PromptHelp, err:
+            except exception.PromptHelp as err:
                 self.io.print_warning('No help available')
-            except exception.PromptErr, err:
+            except exception.PromptErr as err:
                 raise
-            except exception.CmdErr, err:
+            except exception.CmdErr as err:
                 self.io.print_error(err.getErr())
         return plugin.get(var)
 
@@ -290,7 +290,7 @@ class RedirectionManager:
             raise
 
     def straight_local(self, l, plugin):
-        """Effectively just print the straight path to the target"""
+        """Effectively just prints the straight path to the target"""
         params = iDict(plugin.getParameters())
         laddr = self.conv_param(l.listenaddr, params)
         lport = self.conv_param(l.listenport, params)

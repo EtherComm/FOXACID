@@ -4,7 +4,7 @@ IO Handling classes
 The IO Handler works as a wrapper around all user input and output.
 
 Theoretically, to change the way Fuzzbunch looks should only require changing
-this file.  Specialized print functions provide a template-like facility.
+this file.  Specialized print(functions provide a template-like facility.)
 
 """
 import sys
@@ -174,7 +174,7 @@ class IOhandler:
     def get_input(self, prompt):
         if self.raw_input:
             try:
-                line = raw_input(prompt)
+                line = input(prompt)
             except (EOFError, KeyboardInterrupt):
                 line = 'EOF'
         else:
@@ -209,10 +209,10 @@ class IOhandler:
             self.newline()
 
         if line.upper() in ("EOF", "Q", "QUIT"):
-            raise exception.PromptErr, "Aborted by user"
+            raise exception.PromptErr("Aborted by user")
 
         if line.upper() in ("?", "HELP"):
-            raise exception.PromptHelp, "No help available"
+            raise exception.PromptHelp("No help available")
 
         # Retrieve the line, and replace any '$' vars with their values
         line = variable_replace(line, gvars)
@@ -226,7 +226,7 @@ class IOhandler:
                 index = int(line)
                 line = params[index][0]
             except (IndexError, ValueError):
-                raise exception.CmdErr, "Invalid input"
+                raise exception.CmdErr("Invalid input")
 
         return line
 
@@ -241,7 +241,7 @@ class IOhandler:
     def prompt_continue(self):
         line = self.prompt_user("Execute Plugin?", "Yes")
         if line.lower() not in ("yes", "y"):
-            raise exception.CmdErr, "Execution Aborted"
+            raise exception.CmdErr("Execution Aborted")
         return
 
     def prompt_confirm_redir(self):
@@ -277,7 +277,7 @@ class IOhandler:
             try:
                 self.cwrite(self.colorize(line))
             except LookupError:
-                # We failed to print in color.  This is a problem looking up the encoding
+                # We failed to print(in color.  This is a problem looking up the encoding)
                 # Permanently disable color and continue
                 self.havecolor = False
                 self.enablecolor = False
@@ -396,7 +396,7 @@ class IOhandler:
                 if a in attrs:
                     cmd.append("%s" % attrs[a])
 
-        return "\033[" + ";".join(cmd) + "m"
+        return "\0o33[" + ";".join(cmd) + "m"
 
                 
     """

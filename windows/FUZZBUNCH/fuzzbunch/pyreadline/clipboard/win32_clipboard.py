@@ -60,7 +60,7 @@ def enum():
     OpenClipboard(0)
     q=EnumClipboardFormats(0)
     while q:
-        print q,
+        print(q,)
         q=EnumClipboardFormats(q)
     CloseClipboard()
 
@@ -98,7 +98,7 @@ def SetClipboardText(text):
 
 if __name__ == '__main__':
     txt=GetClipboardText()                            # display last text clipped
-    print txt
+    print(txt)
      
      
      

@@ -18,7 +18,7 @@ def start_log(on,filename):
         
 def log(s):
     if _logfile:
-        print >>_logfile, s
+        print(s, file=_logfile)
         _logfile.flush()
 
 

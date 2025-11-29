@@ -9,7 +9,11 @@ from redirection  import LocalRedirection, RemoteRedirection
 import util
 
 import truantchild
-from pytrch import TrchError
+try:
+    from pytrch import TrchError
+except ImportError:
+    # pytrch not available, use stub from truantchild
+    from truantchild import TrchError
 
 import edfmeta
 import xml.parsers.expat as expat
@@ -148,14 +152,14 @@ class EDFPlugin(Plugin):
             session.contract = [util.oParam("Status", "Failed", "String", "Scalar"), 
                                 util.oParam("ReturnCode", "User Abort", "String", "Scalar")]
             session.mark_fail()
-            raise exception.CmdErr, "Canceled by User"
+            raise exception.CmdErr("Canceled by User")
             
         os.chdir(cwd)
 
         try:
             # Wait for the spawned process to connect to our named pipe
             pipe = edfexecution.connect_pipe(pipe, pipeName)
-        except edfexecution.PipeError, err:
+        except edfexecution.PipeError as err:
             self.io.print_error(str(err))
             pipe = None
 
@@ -175,7 +179,7 @@ class EDFPlugin(Plugin):
             session.contract = [util.oParam("Status", "Failed", "String", "Scalar"),
                                 util.oParam("ReturnCode", str(proc.returncode), "String", "Scalar")]
             session.mark_fail()
-            raise exception.CmdErr, "Error Connecting Pipe to Plugin"
+            raise exception.CmdErr("Error Connecting Pipe to Plugin")
 
         # Create OutConfig file name
         outConfName = "%s-%s-OutConfig.xml" % (exeBaseName, timestamp)

@@ -17,6 +17,8 @@ class PluginfinderError(Exception):
     pass
 
 def getextensionfiles(location, ext):
+    if not os.path.exists(location):
+        return []
     return [file 
             for file in os.listdir(location) 
             if file.endswith(ext)]
@@ -33,6 +35,8 @@ def getpluginlist(location, bin):
     @param  location        Directory to search for plugins
     @param  bin             Is what we're trying to load binary?
     """
+    if not os.path.exists(location):
+        return []
     fblist     = getextensionfiles(location, FB_CONFIG_EXT)         # get list of .fb files
     configlist = getextensionfiles(location, PLUGIN_CONFIG_EXT)     # get list of .xml files
     dirlist    = os.listdir(location)

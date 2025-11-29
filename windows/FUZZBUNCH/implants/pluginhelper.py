@@ -16,15 +16,15 @@ try:
         platform = sys.platform + "-" + os.uname()[4]
     arch = SUPPORTED_ARCH[sys.platform]
 except KeyError:
-    print "You are running on an unsuported architecture!"
+    print("You are running on an unsuported architecture!")
     sys.exit(-1)
 
 FB_FILE = os.path.realpath(__file__)
 FB_DIR  = os.path.join(os.path.dirname(FB_FILE), os.path.pardir)
 EDFLIB_DIR = os.path.join(FB_DIR, "lib", arch)
-#print "FBFILE: ", FB_FILE
-#print "FBDIR : ", FB_DIR
-#print "EDFLIB: ", EDFLIB_DIR
+#print("FBFILE: "), FB_FILE
+#print("FBDIR : "), FB_DIR
+#print("EDFLIB: "), EDFLIB_DIR
 
 os.environ['PATH'] += os.pathsep + EDFLIB_DIR
 sys.path.append(os.path.join(FB_DIR, "fuzzbunch"))
@@ -72,7 +72,7 @@ class PythonPlugin(Plugin):
         cmd = "cmd.exe /C \"" + cmd + "\""
         try:
             subprocess.Popen(cmd, shell=False)
-        except OSError, err:
+        except OSError as err:
             self.io.print_error("%s" % str(err))
             return False
         return True
@@ -80,11 +80,11 @@ class PythonPlugin(Plugin):
     def callcommand(self, cmd):
         # XXX - Unix
         cmd = "cmd.exe /C \"" + cmd + "\""
-        #print "EXEC : ", cmd
+        #print("EXEC : "), cmd
 
         try:
             retcode = subprocess.check_call(cmd, shell=False)
-        except (subprocess.CalledProcessError, OSError), err:
+        except (subprocess.CalledProcessError, OSError) as err:
             self.io.print_error("%s" % str(err))
             return False
         return True
@@ -97,16 +97,16 @@ def parseargs(args):
 
     try:
         opts, args = getopt.getopt(args[1:], '', longopt)
-    except getopt.GetoptError, err:
-        #print str(err)
+    except getopt.GetoptError as err:
+        #print(str(err))
         return None
 
     opts = util.iDict(opts)
 
     try:
         inxml = opts['--inconfig']
-    except KeyError, err:
-        print "Missing command argument %s" % str(err)
+    except KeyError as err:
+        print(("Missing command argument %s") % str(err))
         return None
 
     try:
@@ -115,13 +115,13 @@ def parseargs(args):
             validate = False
         else:
             validate = True
-    except KeyError, err:
+    except KeyError as err:
         validate = False
 
     try:
         outxml = opts['--outconfig']
         logfile = opts['--logfile']
-    except KeyError, err:
+    except KeyError as err:
         outxml = None
         logfile = None
 

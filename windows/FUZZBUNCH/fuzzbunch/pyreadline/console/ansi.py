@@ -1,8 +1,8 @@
 # -*- coding: ISO-8859-1 -*-
 import re,sys,os
 
-terminal_escape = re.compile('(\001?\033\\[[0-9;]*m\002?)')
-escape_parts = re.compile('\001?\033\\[([0-9;]*)m\002?')
+terminal_escape = re.compile('(\0o01?\0o33\\[[0-9;]*m\0o02?)')
+escape_parts = re.compile('\0o01?\0o33\\[([0-9;]*)m\0o02?')
 
 
 class AnsiState(object):
@@ -155,17 +155,17 @@ if __name__=="__main__":
     import pprint
     pprint=pprint.pprint
 
-    s="\033[0;31mred\033[0;32mgreen\033[0;33myellow\033[0;34mblue\033[0;35mmagenta\033[0;36mcyan\033[0;37mwhite\033[0m"
+    s="\0o33[0;31mred\0o33[0;32mgreen\0o33[0;33myellow\0o33[0;34mblue\0o33[0;35mmagenta\0o33[0;36mcyan\0o33[0;37mwhite\0o33[0m"
     pprint (write_color(s))    
     pprint (write_color_old(s))
-    s="\033[1;31mred\033[1;32mgreen\033[1;33myellow\033[1;34mblue\033[1;35mmagenta\033[1;36mcyan\033[1;37mwhite\033[0m"
+    s="\0o33[1;31mred\0o33[1;32mgreen\0o33[1;33myellow\0o33[1;34mblue\0o33[1;35mmagenta\0o33[1;36mcyan\0o33[1;37mwhite\0o33[0m"
     pprint (write_color(s))    
     pprint (write_color_old(s))    
 
-    s="\033[0;7;31mred\033[0;7;32mgreen\033[0;7;33myellow\033[0;7;34mblue\033[0;7;35mmagenta\033[0;7;36mcyan\033[0;7;37mwhite\033[0m"
+    s="\0o33[0;7;31mred\0o33[0;7;32mgreen\0o33[0;7;33myellow\0o33[0;7;34mblue\0o33[0;7;35mmagenta\0o33[0;7;36mcyan\0o33[0;7;37mwhite\0o33[0m"
     pprint (write_color(s))    
     pprint (write_color_old(s))
-    s="\033[1;7;31mred\033[1;7;32mgreen\033[1;7;33myellow\033[1;7;34mblue\033[1;7;35mmagenta\033[1;7;36mcyan\033[1;7;37mwhite\033[0m"
+    s="\0o33[1;7;31mred\0o33[1;7;32mgreen\0o33[1;7;33myellow\0o33[1;7;34mblue\0o33[1;7;35mmagenta\0o33[1;7;36mcyan\0o33[1;7;37mwhite\0o33[0m"
     pprint (write_color(s))    
     pprint (write_color_old(s))    
 
@@ -175,7 +175,6 @@ if __name__=="__main__":
     
     c=console.Console()
     c.write_color("dhsjdhs")
-    c.write_color("\033[0;32mIn [\033[1;32m1\033[0;32m]:")
-    print
-    pprint (write_color("\033[0;32mIn [\033[1;32m1\033[0;32m]:"))    
+    c.write_color("\0o33[0;32mIn [\0o33[1;32m1\0o33[0;32m]:")
+    print(pprint (write_color("\0o33[0;32mIn [\0o33[1;32m1\0o33[0;32m]:"))    )
     

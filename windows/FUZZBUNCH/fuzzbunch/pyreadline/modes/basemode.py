@@ -93,7 +93,7 @@ class BaseMode(object):
     def _bind_key(self, key, func):
         '''setup the mapping from key to call the function.'''
         if type(func) != type(self._bind_key):
-            print "Trying to bind non method to keystroke:%s,%s"%(key,func)
+            print("Trying to bind non method to keystroke:%s,%s")%(key,func)
             raise PyreadlineError("Trying to bind non method to keystroke:%s,%s,%s,%s"%(key,func,type(func),type(self._bind_key)))
         keyinfo = make_KeyPress_from_keydescr(key.lower()).tuple()
         log(">>>%s -> %s<<<"%(keyinfo,func.__name__))
@@ -436,9 +436,8 @@ class BaseMode(object):
         output stream. If a numeric argument is supplied, the output is
         formatted in such a way that it can be made part of an inputrc
         file. This command is unbound by default.'''
-        print
-        txt="\n".join(self.rl_settings_to_string())
-        print txt
+        print(txt="\n".join(self.rl_settings_to_string()))
+        print(txt)
         self._print_prompt()
 
 

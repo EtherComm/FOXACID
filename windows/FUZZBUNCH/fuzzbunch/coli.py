@@ -69,7 +69,7 @@ class CommandlineWrapper(object):
 
             # make sure the id from the binary matches the config
             if self.getID() != self.config.id:
-                print "Mismatching configurations!!"
+                print("Mismatching configurations!!")
                 return 1
 
             # XXX Add the bit about help, line 215
@@ -100,8 +100,8 @@ class CommandlineWrapper(object):
                 self.options2Tc( oOptions, outputs )
             except Exception as e:
                 # If this fails, the plugin was not successful
-                print str(oOptions)
-                print "Failed: {0}".format(e)
+                print(str(oOptions))
+                print("Failed: {0}").format(e)
                 return 1
 
             # Add the output parameter for the rendezvous
@@ -113,7 +113,7 @@ class CommandlineWrapper(object):
             self.cleanup( EDF_CLEANUP_WAIT, context, logConfig )
 
         except Exception as e:
-            print "Failed: {0}".format(e)
+            print("Failed: {0}").format(e)
             raise
     
     def __putConfig(self, config, outfile):
@@ -123,12 +123,12 @@ class CommandlineWrapper(object):
         """Setup so that we can do logging"""
         fh = None
         if options.LogFile is not None:
-            print "logging to file"
+            print("logging to file")
             fh = exma.openEMForWriting( options.OutConfig )
             logger = get_logger(options.LogFile)
             #logging.basicConfig(filename=options.LogFile, filemode="w", format="%(message)s", level=logging.INFO)
         else:
-            print "logging to stdout"
+            print("logging to stdout")
             fh = exma.openEMForWriting( None )        # Will cause stdout to be used
             logger = get_logger( None )
             #logging.basicConfig(level=logging.INFO, stream=sys.stdout)
@@ -227,7 +227,7 @@ class CommandlineWrapper(object):
                 param.setValue(local)
             else:
                 socks = params.getvalue() # this is a list
-                for i in xrange(remotes):
+                for i in range(remotes):
                     self.__transformSocket( sock, socks[i], local, cache )
                     socks[i] = local
                 param.setValue(socks)

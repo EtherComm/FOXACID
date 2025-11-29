@@ -1,1 +1,6 @@
 *.rar
+__pycache__/
+*.pyc
+*.pyo
+D:\*
+*.log

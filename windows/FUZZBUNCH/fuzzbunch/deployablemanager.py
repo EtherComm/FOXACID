@@ -64,7 +64,7 @@ class DeployableManager(PluginManager):
 
             listenPort = 0
             if runMode in ("DANE", "DAVE"):
-                pairs = sorted((k, k) for k in plugin.package_arches.iterkeys())
+                pairs = sorted((k, k) for k in plugin.package_arches.keys())
                 self.io.print_prompt_param({
                     "name": "ArchOs",
                     "description": "Architecture/OS of REDIRECTOR",
@@ -93,7 +93,7 @@ class DeployableManager(PluginManager):
             newwindow = False
             
             try:
-                # Last chance to quit, print execution info and prompt
+                # Last chance to quit, print(execution info and prompt)
                 if redirid:
                     self.fb.redirection.print_session(redirid)
                     #self.fb.do_redirect("")
@@ -150,8 +150,8 @@ class DeployableManager(PluginManager):
                         self.io.print_warning("Connection to Target Established")
                         self.io.print_warning("Waiting For Next Stage")
                 else:
-                    raise exception.CmdErr, "%s Failed" % plugin.name
+                    raise exception.CmdErr("%s Failed") % plugin.name
         else:
             #self.do_validate()
-            raise exception.CmdErr, "Execution Aborted"
+            raise exception.CmdErr("Execution Aborted")
         self.io.newline()

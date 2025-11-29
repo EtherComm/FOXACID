@@ -37,7 +37,7 @@ import System
 from event import Event
 from pyreadline.logger import log,log_sock
 
-#print "Codepage",System.Console.InputEncoding.CodePage
+#print("Codepage"),System.Console.InputEncoding.CodePage
 from pyreadline.keysyms import make_keysym, make_keyinfo,make_KeyPress,make_KeyPress_from_keydescr
 from pyreadline.console.ansi import AnsiState
 color=System.ConsoleColor
@@ -120,12 +120,12 @@ class Console(object):
 
 # Map ANSI color escape sequences into Windows Console Attributes
 
-    terminal_escape = re.compile('(\001?\033\\[[0-9;]*m\002?)')
-    escape_parts = re.compile('\001?\033\\[([0-9;]*)m\002?')
+    terminal_escape = re.compile('(\0o01?\0o33\\[[0-9;]*m\0o02?)')
+    escape_parts = re.compile('\0o01?\0o33\\[([0-9;]*)m\0o02?')
 
     # This pattern should match all characters that change the cursor position differently
     # than a normal character.
-    motion_char_re = re.compile('([\n\r\t\010\007])')
+    motion_char_re = re.compile('([\n\r\t\0o10\0o07])')
 
     def write_scrolling(self, text, attr=None):
         '''write text at current cursor position while watching for scrolling.
@@ -161,9 +161,9 @@ class Console(object):
                     if x > w: # newline
                         x -= w
                         y += 1
-                elif chunk[0] == '\007': # bell
+                elif chunk[0] == '\0o07': # bell
                     pass
-                elif chunk[0] == '\010':
+                elif chunk[0] == '\0o10':
                     x -= 1
                     if x < 0:
                         y -= 1 # backed up 1 line
@@ -230,7 +230,7 @@ class Console(object):
         self.WriteConsoleA(self.hout, text, len(text), byref(n), None)
         return len(text)
         
-    if os.environ.has_key("EMACS"):
+    if os."EMACS" in environ:
         def write_color(self, text, attr=None):
             junk = c_int(0)
             self.WriteFile(self.hout, text, len(text), byref(junk), None)
@@ -310,7 +310,7 @@ class Console(object):
                 self.scroll_window(12)
             elif e.Key == System.ConsoleKey.PageUp:#PageUp
                 self.scroll_window(-12)
-            elif str(e.KeyChar)=="\000":#Drop deadkeys
+            elif str(e.KeyChar)=="\0o00":#Drop deadkeys
                 log_sock("Deadkey: %s"%e)
                 return event(self,e)
                 pass
@@ -388,7 +388,7 @@ def install_readline(hook):
     def hook_wrap():
         try:
             res=hook()
-        except KeyboardInterrupt,x:   #this exception does not seem to be caught
+        except KeyboardInterrupt as x:   #this exception does not seem to be caught
             res=""
         except EOFError:
             return None
@@ -417,12 +417,11 @@ if __name__ == '__main__':
     c.write('hi there')
     c.title("Testing console")
 #    c.bell()
-    print
-    print "size",c.size()
-    print '  some printed output'
+    print(print("size"),c.size())
+    print('  some printed output')
     for i in range(10):
         e=c.getkeypress()
-        print e.Key,chr(e.KeyChar),ord(e.KeyChar),e.Modifiers
+        print(e.Key,chr(e.KeyChar),ord(e.KeyChar),e.Modifiers)
     del c
 
     System.Console.Clear()
