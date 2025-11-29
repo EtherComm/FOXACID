@@ -1,3 +1,21 @@
+# ⚠️ CRITICAL SECURITY WARNING ⚠️
+
+## THIS REPOSITORY CONTAINS OFFENSIVE CYBERWEAPONS - NOT SAFE FOR USE
+
+**READ THE [SECURITY_ASSESSMENT.md](SECURITY_ASSESSMENT.md) BEFORE PROCEEDING**
+
+This repository contains leaked NSA hacking tools and exploits. Using this code is:
+- **ILLEGAL** in most contexts without explicit authorization
+- **DANGEROUS** to networks and systems
+- **UNETHICAL** without proper authorization
+- **DETECTABLE** by security software
+
+**Unauthorized use may result in criminal prosecution.**
+
+For defensive research only: Use isolated, air-gapped environments. Consult legal counsel first.
+
+---
+
 # EQGRP Lost in Translation
 Decrypted content of odd.tar.xz.gpg, swift.tar.xz.gpg, windows.tar.xz.gpg, eqgrp-auction-file.tar.xz, eqgrp-free-file.tar.xz, windows_warez.tar.gz, equation_drug.tar.xz and unix_warez.tar.gz
 reorganized by exploit and payload
@@ -5,11 +23,26 @@ reorganized by exploit and payload
 Downloaded from https://yadi.sk/d/NJqzpqo_3GxZA4
 Original post from the #ShadowBrokers https://steemit.com/shadowbrokers/@theshadowbrokers/lost-in-translation
 
+## Contents
+
+**⚠️ All components are UNSAFE for general use - See [SECURITY_ASSESSMENT.md](SECURITY_ASSESSMENT.md)**
+
 - **equation_drug**: contains various Windows exploits
 - **windows**: contains DANDERSPRITZ and FUZZBUNCH
 - **linux**: contains Linux exploits, implants and payloads
 - **swift**: contains operational notes from banking attacks
 - **oddjob**: docs related to the ODDJOB backdoor 
+
+### Quick Safety Summary
+
+❌ **DANDERSPRITZ** - Post-exploitation framework. NOT SAFE. Designed for unauthorized access and system control.
+
+❌ **FUZZBUNCH** - Exploit deployment framework. NOT SAFE. Contains 15+ exploits and 1,126+ malicious binaries.
+
+❌ **Exploits** - All exploits are designed for unauthorized system compromise. NOT SAFE.
+
+**For comprehensive risk analysis and legal considerations, read [SECURITY_ASSESSMENT.md](SECURITY_ASSESSMENT.md)**
+ 
 
 ## sha256 hashes
 ### Original archives
