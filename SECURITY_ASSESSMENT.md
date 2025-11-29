@@ -8,6 +8,8 @@
 
 **THIS REPOSITORY IS NOT SAFE TO USE FOR ANY LEGITIMATE PURPOSE.**
 
+**🚨 CRITICAL: Executing any files from this repository WILL harm your computer system. See [EXECUTION_RISKS.md](EXECUTION_RISKS.md) for detailed information about risks to YOUR system.**
+
 This repository contains leaked NSA (National Security Agency) hacking tools and exploits from the "Equation Group" that were publicly released by the Shadow Brokers in 2017. The contents include:
 
 - **DANDERSPRITZ** - A command and control framework for post-exploitation
@@ -60,8 +62,12 @@ This repository contains decrypted archives from the Shadow Brokers leak, which 
 
 4. **Active Threats**
    - Contains 1,126+ compiled binaries that cannot be easily verified
-   - May contain additional undocumented backdoors or malware
+   - **Binaries may be trojaned or modified by unknown actors after the leak**
+   - **Executing these files WILL harm your computer** - they are actual malware
    - Risk of accidental system compromise if executed
+   - May cause system crashes, BSOD, boot failures
+   - Can install persistent backdoors and rootkits
+   - **See [EXECUTION_RISKS.md](EXECUTION_RISKS.md) for complete details**
 
 ### ❌ DanderSpritz Safety: UNSAFE
 
@@ -95,14 +101,57 @@ This repository contains decrypted archives from the Shadow Brokers leak, which 
    - Presence on a system may trigger security alerts
    - Could be mistaken for an actual compromise
 
+## Will Executing These Tools Harm My Computer?
+
+### 🚨 YES - ABSOLUTELY
+
+**For complete details, see [EXECUTION_RISKS.md](EXECUTION_RISKS.md)**
+
+**Quick Summary of Execution Dangers:**
+
+1. **Self-Infection Risk**
+   - The 1,126+ binaries are ACTUAL MALWARE (backdoors, rootkits, trojans)
+   - Leaked publicly in 2017 - may be modified/trojaned by unknown actors
+   - Cannot verify integrity - closed-source, no checksums available
+   - Executing any binary can infect YOUR system with persistent malware
+
+2. **System Damage**
+   - Kernel drivers (.sys files) can cause Blue Screen of Death (BSOD)
+   - May corrupt system files, registry, boot configuration
+   - Can make system unbootable, require complete reinstall
+   - Data loss from crashes and instability
+
+3. **Unintended Self-Compromise**
+   - Exploits target network services - can attack YOUR system if misconfigured
+   - DANDERSPRITZ may install backdoors on localhost
+   - Testing on yourself = successfully hacking yourself
+   - Credential dumpers crash LSASS process = system unstable/unable to login
+
+4. **Network Propagation**
+   - Tools designed to spread across networks
+   - Can attack your router, other devices, neighbors
+   - Legal liability for attacking other systems
+   - ISP detection and investigation
+
+5. **Antivirus Response**
+   - Will be detected as malicious immediately
+   - Files quarantined or deleted automatically
+   - System may be isolated from network
+   - Alerts sent to IT department (corporate) or ISP
+
+**Bottom Line: Every executable file should be treated as actively malicious malware that will infect your system.**
+
 ## Risk Categories
 
 ### 🔴 Critical Risks
 
+- **System Self-Infection**: Executing binaries WILL infect your computer with malware/backdoors
+- **System Instability/Crashes**: Kernel drivers and exploits cause BSOD, boot failures, data loss
 - **Legal Prosecution**: Unauthorized use constitutes federal crimes in most jurisdictions
 - **Malware Infection**: Executables may be trojaned or backdoored by unknown parties after the leak
 - **Network Compromise**: Accidental execution could compromise entire networks
 - **Attribution Issues**: Use could be attributed to state-sponsored activity
+- **Data Theft**: Backdoors designed to steal credentials, files, and sensitive information
 
 ### 🟠 High Risks
 

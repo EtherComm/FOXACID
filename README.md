@@ -2,7 +2,17 @@
 
 ## THIS REPOSITORY CONTAINS OFFENSIVE CYBERWEAPONS - NOT SAFE FOR USE
 
-**READ THE [SECURITY_ASSESSMENT.md](SECURITY_ASSESSMENT.md) BEFORE PROCEEDING**
+### 🚨 WILL EXECUTING THESE HARM MY COMPUTER? YES! 🚨
+
+**Executing any files from this repository WILL harm your computer system.**
+- These are ACTUAL MALWARE and EXPLOITS designed to compromise systems
+- The 1,126+ binaries may be TROJANED with additional backdoors
+- Can cause system crashes, data loss, persistent infections
+- Will trigger antivirus and may result in legal investigation
+
+**➡️ READ [EXECUTION_RISKS.md](EXECUTION_RISKS.md) for detailed risks to YOUR system**
+
+**READ THE [SECURITY_ASSESSMENT.md](SECURITY_ASSESSMENT.md) for legal and ethical analysis**
 
 This repository contains leaked NSA hacking tools and exploits. Using this code is:
 - **ILLEGAL** in most contexts without explicit authorization
