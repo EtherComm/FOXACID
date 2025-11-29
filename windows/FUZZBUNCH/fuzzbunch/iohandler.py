@@ -174,7 +174,7 @@ class IOhandler:
     def get_input(self, prompt):
         if self.raw_input:
             try:
-                line = raw_input(prompt)
+                line = input(prompt)
             except (EOFError, KeyboardInterrupt):
                 line = 'EOF'
         else:

@@ -1,0 +1,55 @@
+fb > setg Color True
+[+] Set Color => True
+fb > setg ShowHiddenParameters False
+[+] Set ShowHiddenParameters => False
+fb > autorun
+[*] Autorun ON
+
+ImplantConfig Autorun List
+==========================
+
+  0) prompt confirm
+  1) execute
+
+
+Exploit Autorun List
+====================
+
+  0) apply
+  1) touch all
+  2) prompt confirm
+  3) execute
+
+
+Special Autorun List
+====================
+
+  0) apply
+  1) touch all
+  2) prompt confirm
+  3) execute
+
+
+Payload Autorun List
+====================
+
+  0) apply
+  1) prompt confirm
+  2) execute
+
+
+fb > setg FbStorage /home/runner/work/FOXACID/FOXACID/windows/FUZZBUNCH/storage
+[+] Set FbStorage => /home/runner/work/FOXACID/FOXACID/windows/FUZZBUNCH/storage
+fb > retarget
+
+[*] Retargetting Session
+
+
+[*] Checking /home/runner/work/FOXACID/FOXACID/windows/FUZZBUNCH/TestProject for projects
+Index     Project                 
+-----     -------                 
+0         Create a New Project    
+
+
+[-] Prompt Error: Aborted by user
+fb > EOF

@@ -58,7 +58,7 @@ class PluginManager(CmdCtx):
                 # We're in MinSizeRel
                 name = files[0].split('-')[0]
                 self.pluginList[name] = item
-        except TruantchildError as e:
+        except (TruantchildError, EnvironmentError) as e:
             # If we fail to process something, don't load this plugin, but also don't fail
             # to load the other plugins
             raise exception.PluginXmlErr(str(e))

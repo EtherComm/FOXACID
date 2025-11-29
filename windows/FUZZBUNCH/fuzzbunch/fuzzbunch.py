@@ -859,7 +859,7 @@ class Fuzzbunch(FbCmd):
                 targetvar = self.io.prompt_user("Default " + prompt, default, gvars=self.fbglobalvars)
                 targetvar = util.validateip(targetvar)
                 if not targetvar:
-                    raise exception.CmdErr("Invalid ") + prompt
+                    raise exception.CmdErr("Invalid " + prompt)
             except exception.PromptErr as err:
                 raise exception.PromptErr(err.error)
             except exception.PromptHelp as err:

@@ -96,6 +96,9 @@ class Plugin(truantchild.Config):
             from truantchild import TrchError as TruantchildError
         try:
             truantchild.Config.__init__(self, files)
+            # Check if platform-specific libraries are available
+            if self._inputParams is None:
+                raise EnvironmentError("Cannot initialize plugin - platform-specific libraries not available")
             self.param_order = edfmeta.parse_iparamorder(self.xmlInConfig)
             self._curParams   = self._inputParams
             self._defaults    = self.getParameters()

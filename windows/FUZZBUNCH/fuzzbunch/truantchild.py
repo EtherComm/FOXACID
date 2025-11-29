@@ -756,6 +756,22 @@ class Config:
         self.init_config()
 
     def init_config(self):
+        if trch is None or not hasattr(exma, 'readParamsFromEM'):
+            # Libraries not available - initialize with minimal data
+            print("Warning: Cannot initialize config - platform-specific libraries not available")
+            self.configXML = None
+            self.config = None
+            self.id = "unknown"
+            self.name = "unknown"
+            self.version = "unknown"
+            self.configVersion = "unknown"
+            self.namespaceUri = ""
+            self.schemaVersion = ""
+            self._inputParams = None
+            self._outputParams = None
+            self._constants = None
+            return
+            
         self.configXML     = exma.readParamsFromEM(ctypes.c_char_p(self.xmlInConfig))
         # Config_unmarshal can fail and return None, which 
         # raises TrchError when passed to Config_getID
