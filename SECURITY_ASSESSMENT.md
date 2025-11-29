@@ -153,11 +153,13 @@ Unlike legitimate penetration testing frameworks (Metasploit, Burp Suite, etc.):
 
 For legitimate security research and education:
 
-- **Metasploit Framework**: Open-source penetration testing framework
-- **OWASP**: Web application security testing resources
-- **HackTheBox/TryHackMe**: Legal practice environments
-- **CVE Databases**: Public vulnerability information
-- **NIST/SANS**: Cybersecurity frameworks and training
+- **Metasploit Framework** (https://www.metasploit.com/): Open-source penetration testing framework with ethical guidelines and proper authorization requirements
+- **OWASP** (https://owasp.org/): Web application security testing resources, including ZAP proxy and comprehensive security guides
+- **HackTheBox** (https://www.hackthebox.com/) / **TryHackMe** (https://tryhackme.com/): Legal, controlled practice environments designed for learning security skills
+- **CVE/NVD Databases** (https://nvd.nist.gov/): Public vulnerability information from NIST for defensive research
+- **NIST Cybersecurity Framework** (https://www.nist.gov/cyberframework): Industry-standard security frameworks
+- **SANS Institute** (https://www.sans.org/): Professional cybersecurity training and certifications
+- **Kali Linux** (https://www.kali.org/): Security-focused Linux distribution with legitimate pentesting tools
 
 ## Conclusion
 
