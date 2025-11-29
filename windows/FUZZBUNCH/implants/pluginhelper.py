@@ -106,7 +106,7 @@ def parseargs(args):
     try:
         inxml = opts['--inconfig']
     except KeyError as err:
-        print("Missing command argument %s") % str(err)
+        print(("Missing command argument %s") % str(err))
         return None
 
     try:

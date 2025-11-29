@@ -140,7 +140,7 @@ class iDict(dict):
         return dict.get(self, self.real_key(k), defval)
 
     def has_key(self, val):
-        return self, self.real_key(val in dict)
+        return self.real_key(val) in self
 
     def items(self):
         return [Param(key,val) for key,val in dict.items(self)]
@@ -213,7 +213,7 @@ def parseinput(line, count):
     return (len(params) - params.count(None), params)
 
 def variable_replace(line, gvars):
-    patterns = ["(\$[A-Za-z0-9_]+)", "(\$\{[A-Za-z0-9_]+\})"]
+    patterns = [r"(\$[A-Za-z0-9_]+)", r"(\$\{[A-Za-z0-9_]+\})"]
     newline = line.strip()
     for p in patterns:
         group = re.split(p, newline)
