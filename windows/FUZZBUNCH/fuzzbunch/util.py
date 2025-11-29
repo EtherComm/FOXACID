@@ -89,7 +89,7 @@ def superTuple(typename, *attribute_names):
         __slots__ = ()
         def __new__(cls, *args):
             if len(args) != nargs:
-                raise TypeError('%s takes %d args (%d given)') % (typename, nargs, len(args))
+                raise TypeError(('%s takes %d args (%d given)') % (typename, nargs, len(args)))
             return tuple.__new__(cls, args)
         def __repr__(self):
             return '%s(%s)' % (typename, ', '.join(map(repr, self)))

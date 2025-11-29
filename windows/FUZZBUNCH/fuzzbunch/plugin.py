@@ -58,7 +58,7 @@ def safesetparameter(f):
         f(self, name, value)
         if not self.hasValidValue(name):
             self._trch_set(name, old)
-            raise exception.CmdErr("Invalid value for '%s' (%s)") % (name, value)
+            raise exception.CmdErr(("Invalid value for '%s' (%s)") % (name, value))
     return wrap
 
 def safesetchoice(f):
@@ -71,7 +71,7 @@ def safesetchoice(f):
         if not self.hasValidValue(name):
             # Restore to the old
             self._trch_set(name, old)
-            raise exception.CmdErr("Invalid value for %s (%s)") % (name, value)
+            raise exception.CmdErr(("Invalid value for %s (%s)") % (name, value))
         # We want var matches, not var/val 
         for param in paramcache:
             if param.name in util.iDict(self.cache_choiceparams(name)):
@@ -90,7 +90,10 @@ Plugin base class
 class Plugin(truantchild.Config):
     def __init__(self, files, io):
         import truantchild
-        from pytrch import TrchError as TruantchildError
+        try:
+            from pytrch import TrchError as TruantchildError
+        except ImportError:
+            from truantchild import TrchError as TruantchildError
         try:
             truantchild.Config.__init__(self, files)
             self.param_order = edfmeta.parse_iparamorder(self.xmlInConfig)

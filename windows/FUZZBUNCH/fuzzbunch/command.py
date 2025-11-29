@@ -402,7 +402,7 @@ class FbCmd(cmd.Cmd):
     """
     def help_history(self):
         usage = ["history [index]",
-                "Rerun a previous command. Omit index to print(history"])
+                "Rerun a previous command. Omit index to print history"]
         self.io.print_usage(usage)
 
     def do_history(self, arg):

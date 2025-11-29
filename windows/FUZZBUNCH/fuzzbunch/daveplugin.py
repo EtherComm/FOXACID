@@ -5,7 +5,10 @@ import exception, util, truantchild
 import edfmeta, edfexecution
 #from plugin import Plugin
 from edfplugin import EDFPlugin
-from pytrch import TrchError
+try:
+    from pytrch import TrchError
+except ImportError:
+    from truantchild import TrchError
 
 from redirection  import LocalRedirection, RemoteRedirection
 

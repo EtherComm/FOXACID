@@ -9,12 +9,16 @@ import exma
 import hashlib
 import os
 from util import superTuple, oParam
-import pytrch as trch
 
 try:
+    import pytrch as trch
     from pytrch import TrchError as TrchError
-except:
-    from pytrch import TrchError
+except ImportError:
+    # pytrch module not available (requires platform-specific binaries)
+    print("Warning: pytrch module not available, some functionality will be limited")
+    trch = None
+    class TrchError(Exception):
+        pass
 
 __all__ = ["attribute_convert", "Parameter", 
            "Paramgroup", "Paramchoice",

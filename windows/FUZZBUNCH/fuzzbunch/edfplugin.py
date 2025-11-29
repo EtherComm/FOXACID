@@ -9,7 +9,11 @@ from redirection  import LocalRedirection, RemoteRedirection
 import util
 
 import truantchild
-from pytrch import TrchError
+try:
+    from pytrch import TrchError
+except ImportError:
+    # pytrch not available, use stub from truantchild
+    from truantchild import TrchError
 
 import edfmeta
 import xml.parsers.expat as expat

@@ -861,7 +861,7 @@ class Fuzzbunch(FbCmd):
                 if not targetvar:
                     raise exception.CmdErr("Invalid ") + prompt
             except exception.PromptErr as err:
-                raise exception.PromptErr, err.error
+                raise exception.PromptErr(err.error)
             except exception.PromptHelp as err:
                 pass
             except exception.CmdErr as err:

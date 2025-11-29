@@ -46,7 +46,10 @@ class PluginManager(CmdCtx):
 
     """
     def add_plugin(self, files, Constructor):
-        from pytrch import TrchError as TruantchildError
+        try:
+            from pytrch import TrchError as TruantchildError
+        except ImportError:
+            from truantchild import TrchError as TruantchildError
         try:
             item = Constructor(files, self.io)
             try:
@@ -64,7 +67,7 @@ class PluginManager(CmdCtx):
         try:
             return self.pluginList[name]
         except KeyError:
-            raise exception.CmdErr("'%s' not a valid %s") % (name, self.get_type())
+            raise exception.CmdErr(("'%s' not a valid %s") % (name, self.get_type()))
 
     def get_plugins(self):
         for plugin in self.pluginList.values():
@@ -97,7 +100,7 @@ class PluginManager(CmdCtx):
 
     """
     def print_info(self, pname=None):
-        """Get the currently active plugin and print(various )
+        """Get the currently active plugin and print various 
         informational items about it: 
         * Name, Version, Type
         * Redirection information

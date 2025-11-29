@@ -290,7 +290,7 @@ class RedirectionManager:
             raise
 
     def straight_local(self, l, plugin):
-        """Effectively just print(the straight path to the target""")
+        """Effectively just prints the straight path to the target"""
         params = iDict(plugin.getParameters())
         laddr = self.conv_param(l.listenaddr, params)
         lport = self.conv_param(l.listenport, params)
